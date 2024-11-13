@@ -1,4 +1,4 @@
-class Goblin {
+export default class Goblin {
     constructor(imgUrl) {
         this.imgUrl = imgUrl;
         this.cells = document.querySelectorAll('.cell');
