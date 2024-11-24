@@ -20,7 +20,7 @@ export default [
     rules: {
       ...jest.configs['flat/recommended'].rules,
       'jest/prefer-expect-assertions': 'off',
-      'jest/expect-expect': 'error'
+      'jest/expect-expect': 'error',
     },
   }
 ];
