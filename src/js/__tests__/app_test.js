@@ -1,7 +1,27 @@
+import { createGameBoard } from '../app';
 import Goblin from '../img-moving/img-moving';
 
 /* eslint-disable-next-line no-unused-vars */
-import main from '../app'
+import { main } from '../app'
+
+
+describe('createGameBoard', () => {
+  beforeEach(() => {
+      document.body.innerHTML = '';
+  });
+
+  test('must create game-board element with 16 cells', () => {
+      createGameBoard();
+      
+      const gameBoard = document.querySelector('.game-board');
+      expect(gameBoard).not.toBeNull(); 
+      expect(gameBoard.children.length).toBe(16); 
+
+      for (let i = 0; i < gameBoard.children.length; i++) {
+          expect(gameBoard.children[i].classList.contains('cell')).toBe(true);
+      }
+  });
+});
 
 
 jest.mock('../img-moving/img-moving');
