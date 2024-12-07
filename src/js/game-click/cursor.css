@@ -1,0 +1,19 @@
+.custom-cursor {
+  width: 70px; 
+  height: 70px; 
+  background-image: url('./img/hammer-128.webp'); 
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  position: absolute; 
+  pointer-events: none; 
+  transform: translate(-50%, -50%); 
+  z-index: 9999;
+}
+
+.custom-cursor.hidden {
+  display: none; 
+}
+
+.custom-cursor.hit {
+  transform: translate(-50%, -50%) scale(0.7); 
+}
