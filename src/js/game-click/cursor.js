@@ -30,7 +30,6 @@ export default class Cursor {
     }
 
     bringDown() {
-        debugger;
         this._customCursor.classList.add('hit');
     }
 }

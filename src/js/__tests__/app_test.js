@@ -1,43 +1,33 @@
-import Goblin from '../img-moving/img-moving';
-
 /* eslint-disable-next-line no-unused-vars */
-import { main } from '../app'
+import { main } from '../app';
+import Cursor from '../game-click/cursor';
+import { createGameBoard } from '../game-board/game-board';
+import GameClick from '../game-click/game-click';
 
+jest.mock('../game-click/cursor');
+jest.mock('../game-board/game-board');
+jest.mock('../game-click/game-click');
 
-jest.mock('../img-moving/img-moving');
+describe('main function', () => {
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
 
-describe('Goblin movement on DOMContentLoaded', () => {
+    test('should create game board and initialize game and cursor on DOMContentLoaded', () => {
+        const mockGameBoard = {};
+        const mockCursorInstance = {};
+        const mockGameClickInstance = {};
 
-  beforeEach(() => {
-      jest.clearAllMocks(); 
-      document.body.innerHTML = ''; 
-  });
+        createGameBoard.mockReturnValue(mockGameBoard);
+        Cursor.mockReturnValue(mockCursorInstance);
+        GameClick.mockReturnValue(mockGameClickInstance);
 
-  test('should create a Goblin instance on DOMContentLoaded', () => {
-      document.dispatchEvent(new Event('DOMContentLoaded'));
+        document.dispatchEvent(new Event('DOMContentLoaded'));
 
-      expect(Goblin).toHaveBeenCalledTimes(1);
-      expect(Goblin).toHaveBeenCalledWith('https://github.com/netology-code/ahj-homeworks/blob/video/dom/pic/goblin.png?raw=true');
-  });
+        expect(createGameBoard).toHaveBeenCalled();
 
-  test('should call move method on DOMContentLoaded', () => {
-      document.dispatchEvent(new Event('DOMContentLoaded'));
+        expect(GameClick).toHaveBeenCalledWith(document.querySelector('.game-board'));
 
-      expect(Goblin.mock.instances[0].move).toHaveBeenCalledTimes(1);
-  });
-
-  test('should call move method every second', () => {
-      jest.useFakeTimers(); 
-      document.dispatchEvent(new Event('DOMContentLoaded'));
-
-      expect(Goblin.mock.instances[0].move).toHaveBeenCalledTimes(1);
-
-      jest.advanceTimersByTime(1000);
-      expect(Goblin.mock.instances[0].move).toHaveBeenCalledTimes(2);
-
-      jest.advanceTimersByTime(2000);
-      expect(Goblin.mock.instances[0].move).toHaveBeenCalledTimes(4);
-
-      jest.useRealTimers(); 
-  });
+        expect(Cursor).toHaveBeenCalledWith(document.body);
+    });
 });
